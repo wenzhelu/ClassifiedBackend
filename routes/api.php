@@ -13,6 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// get specific item
+Route::get('/items/{item}', 'ItemController@get');
+
+// get all items
+Route::get('/items', 'ItemController@all');
+
+// create an item
+Route::post('/items', 'ItemController@create');
+
+// update an item
+Route::put('/items/{item}', 'ItemController@update');
+
+// delete an item
+Route::delete('items/{item}', 'ItemController@delete');
+

@@ -44,6 +44,13 @@ return [
             'level' => 'debug',
         ],
 
+        // add for database query logging
+        'mysql' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/mysql.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
