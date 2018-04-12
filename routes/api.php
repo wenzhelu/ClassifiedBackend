@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 // });
 
 // get specific item
-Route::get('/items/{item}', 'ItemController@get');
+Route::get('/items/{id}', 'ItemController@get');
 
 // get all items
 Route::get('/items', 'ItemController@all');

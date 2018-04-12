@@ -26,8 +26,8 @@ class ItemController extends Controller
      * 
      * @return Object
      */
-    public function get(Item $item) {
-        return $item;
+    public function get($id) {
+        return Item::find($id);
     }
 
     // Be cautious about update and insert, check out the request
