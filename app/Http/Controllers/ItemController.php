@@ -30,6 +30,10 @@ class ItemController extends Controller
         return Item::find($id);
     }
 
+    public function getCate($category) {
+        return Item::where('category', $category)->get();   
+    }
+
     // Be cautious about update and insert, check out the request
 
     /**

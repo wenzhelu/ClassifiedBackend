@@ -17,10 +17,19 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('email');
+            $table->string('phone_number', 15);
+            $table->string('photo_url');
+            $table->string('address');
+            $table->string('occupation');
+            // using integer to represent roles
+            $table->integer('role');
+            // $table->string('password');
+            // $table->rememberToken();
             $table->timestamps();
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            $table->engine = 'InnoDB';
         });
     }
 

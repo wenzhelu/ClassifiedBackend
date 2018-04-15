@@ -19,6 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('buyer_id');
             $table->integer('seller_id');
             $table->timestamps();
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 

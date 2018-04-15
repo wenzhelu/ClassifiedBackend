@@ -17,15 +17,15 @@ class ItemTableSeeder extends Seeder
 
         $f = \Faker\Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Item::create([
+                'name' => $f->word,
                 'description' => $f->text,
                 'price' => $f->randomNumber,
-                'user_id' => $i,
+                'user_id' => $f->randomDigit,
                 'category' => $f->word,
                 'purpose' => $f->randomDigit,
                 'photo_url' => $f->url,
-                // 'status' => $f->randomDigit,
                 'status' => $f->randomDigit
             ]);
         }

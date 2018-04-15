@@ -23,6 +23,9 @@ Route::get('/items/{id}', 'ItemController@get');
 // get all items
 Route::get('/items', 'ItemController@all');
 
+// get items according to category
+Route::get('/items/category/{category}', 'ItemController@getCate');
+
 // create an item
 Route::post('/items', 'ItemController@create');
 
