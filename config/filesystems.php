@@ -48,6 +48,14 @@ return [
             'root' => storage_path('app'),
         ],
 
+        // remember to create a symbolic link to the real folder
+        'image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/image'),
+            'url' => env('APP_URL').'/image',
+            'visibility' => 'public',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
