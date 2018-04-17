@@ -81,5 +81,7 @@ class ItemController extends Controller
         $item->photo_url = Storage::disk('image')->url($filename);
 
         $item->save();
+
+        return response()->json($item, 200);
     }
 }
