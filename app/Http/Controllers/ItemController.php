@@ -78,8 +78,8 @@ class ItemController extends Controller
         }
 
         $f = $req->file;
-
-        $filename = uniqid("", true).".$f->guessExtension()";
+        $ext = $f->guessExtension();
+        $filename = uniqid("", true).".$ext";
         // store it in photo disk
         Log::debug('filename: '.$filename);
         $f->storeAs('/', $filename, 'image');
