@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -71,9 +71,20 @@ class ItemController extends Controller
     public function uploadPhoto(Request $req, Item $item) {
         // this will be unique normally
         if (!$req->hasFile('file')) {
-            Log::debug('no photo!');
+            Log::debug('no file!');
             return response()->json([
-                'error' => 'no photo'
+                'error' => 'no file field'
+            ], 400);
+        }
+
+        $vali = Validator::make($req->all(), [
+            'file' => 'required | mimes:jpeg,jpg,png',
+        ]);
+
+        if ($vali->fails()) {
+            Log::debug('receiving not a photo');
+            return response()->json([
+                'error' => 'not a photo'
             ], 400);
         }
 
@@ -88,6 +99,9 @@ class ItemController extends Controller
 
         $item->save();
 
-        return response()->json($item, 200);
+        return response()->json([
+            'success' => true,
+            'url' => Storage::disk('image')->url($filename),
+        ], 200);
     }
 }
