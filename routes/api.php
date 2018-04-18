@@ -36,5 +36,5 @@ Route::put('/items/{item}', 'ItemController@update');
 Route::delete('/items/{item}', 'ItemController@delete');
 
 // post a photo related to certain item
-Route::post('/items/image/{id}', 'ItemController@uploadPhoto');
+Route::post('/items/image/{item}', 'ItemController@uploadPhoto');
 
