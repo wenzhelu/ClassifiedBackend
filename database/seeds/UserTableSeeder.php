@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
                 'email' => $f->email,
                 'phone_number' => $f->e164PhoneNumber,
                 'photo_url' => $f->url,
-                'role' => $f->randomDigit,
+                'role' => $f->randomDigit % 2,
                 'address' => $f->address,
                 'occupation' => $f->word,
             ]);

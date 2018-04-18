@@ -20,8 +20,8 @@ class TransactionTableSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             Transaction::create([
                 'item_id' => $f->randomNumber(2),
-                'buyer_id' => $f->randomDigit,
-                'seller_id' => $f->randomDigit
+                'buyer_id' => $f->randomDigit + 1,
+                'seller_id' => $f->randomDigit + 1
             ]);
         }
     }

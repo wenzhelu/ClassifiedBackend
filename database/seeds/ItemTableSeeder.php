@@ -22,11 +22,11 @@ class ItemTableSeeder extends Seeder
                 'name' => $f->word,
                 'description' => $f->text,
                 'price' => $f->randomNumber,
-                'user_id' => $f->randomDigit,
+                'user_id' => $f->randomDigit + 1,
                 'category' => $f->word,
-                'purpose' => $f->randomDigit,
+                'purpose' => $f->randomNumber % 2,
                 'photo_url' => $f->url,
-                'status' => $f->randomDigit
+                'status' => 1
             ]);
         }
 
