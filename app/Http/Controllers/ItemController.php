@@ -77,7 +77,7 @@ class ItemController extends Controller
             ], 400);
         }
 
-        $f = $req->photo;
+        $f = $req->file;
 
         $filename = uniqid("", true).".$f->guessExtension()";
         // store it in photo disk
