@@ -70,7 +70,13 @@ class ItemController extends Controller
     // $item is inject by laravel framework
     public function uploadPhoto(Request $req, Item $item) {
         // this will be unique normally
-        if (!$req->hasFile('photo')) return;
+        if (!$req->hasFile('photo')) {
+            Log::debug('no photo!');
+            return response()->json([
+                'error' => 'no photo'
+            ], 400);
+        }
+
         $f = $req->photo;
 
         $filename = uniqid("", true).".$f->guessExtension()";
