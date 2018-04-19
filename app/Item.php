@@ -9,7 +9,7 @@ class Item extends Model
     //
 
     protected $fillable = ['description', 'price', 'status', 'purpose', 
-        'user_id', 'category', 'photo_url'];
+        'user_id', 'category', 'photo_url', 'name'];
 
     public function transaction() {
         return $this->hasOne('App\Transaction');
