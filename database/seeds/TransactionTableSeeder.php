@@ -17,9 +17,9 @@ class TransactionTableSeeder extends Seeder
 
         $f = \Faker\Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Transaction::create([
-                'item_id' => $f->randomNumber(2),
+                'item_id' => $f->randomDigit + 1,
                 'buyer_id' => $f->randomDigit + 1,
                 'seller_id' => $f->randomDigit + 1
             ]);

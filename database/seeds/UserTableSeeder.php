@@ -22,8 +22,8 @@ class UserTableSeeder extends Seeder
                 'name' => "$f->firstName"." $f->lastName",
                 'email' => $f->email,
                 'phone_number' => $f->e164PhoneNumber,
-                'photo_url' => $f->url,
-                'role' => $f->randomDigit % 2,
+                // 'photo_url' => $f->url,
+                'role' => 1,
                 'address' => $f->address,
                 'occupation' => $f->word,
             ]);

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone_number', 15);
-            $table->string('photo_url');
+            $table->string('photo_url')->default('');
             $table->string('address');
             $table->string('occupation');
             // using integer to represent roles
