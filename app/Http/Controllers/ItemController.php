@@ -35,7 +35,15 @@ class ItemController extends Controller
     }
 
     public function getCate($category) {
-        return Item::where('category', $category)->get();   
+        return Item::where('category', $category)->where('status', 0)->get();   
+    }
+
+    public function getUser($user_id) {
+        return Item::where('user_id', $user_id)->get();
+    }
+
+    public function getStatus($status) {
+        return Item::where('status', $status)->get();
     }
 
     // Be cautious about update and insert, check out the request
@@ -55,8 +63,39 @@ class ItemController extends Controller
 
     public function create(Request $req) {
         $item = Item::create($req->all());
+        if (!$req->hasFile('file')) {
+            Log::debug('no file!');
 
-        return response()->json($item, 201);
+            return response()->json([
+                'error' => 'no file field'
+            ], 400);
+        }
+
+        $vali = Validator::make($req->all(), [
+            'file' => 'required | mimes:jpeg,jpg,png',
+        ]);
+
+        if ($vali->fails()) {
+            Log::debug('receiving not a photo');
+            return response()->json([
+                'error' => 'not a photo'
+            ], 400);
+        }
+
+        $f = $req->file;
+        $ext = $f->guessExtension();
+        $filename = uniqid("", true).".$ext";
+        // store it in photo disk
+        Log::debug('filename: '.$filename);
+        $f->storeAs('/', $filename, 'image');
+
+        $item->photo_url = Storage::disk('image')->url($filename);
+
+        $item->save();
+        return response()->json([
+            'success' => true,
+            'url' => Storage::disk('image')->url($filename),
+        ], 201);
     }
 
     public function delete(Item $item) {
@@ -98,7 +137,6 @@ class ItemController extends Controller
         $item->photo_url = Storage::disk('image')->url($filename);
 
         $item->save();
-
         return response()->json([
             'success' => true,
             'url' => Storage::disk('image')->url($filename),

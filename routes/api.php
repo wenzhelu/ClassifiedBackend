@@ -26,6 +26,12 @@ Route::get('/items', 'ItemController@all');
 // get items according to category
 Route::get('/items/category/{category}', 'ItemController@getCate');
 
+// get items according to user_id(owner)
+Route::get('/items/user/{user_id}', 'ItemController@getUser');
+
+// get items according to status
+Route::get('/items/status/{status}', 'ItemController@getStatus');
+
 // create an item
 Route::post('/items', 'ItemController@create');
 
