@@ -82,7 +82,7 @@ class ItemController extends Controller
 
             return response()->json([
                 'error' => 'no file field'
-            ], 400);
+            ], 201);
         }
 
         $vali = Validator::make($req->all(), [
@@ -93,7 +93,7 @@ class ItemController extends Controller
             Log::debug('receiving not a photo');
             return response()->json([
                 'error' => 'not a photo'
-            ], 400);
+            ], 201);
         }
 
         $f = $req->file;

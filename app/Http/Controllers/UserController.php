@@ -33,7 +33,7 @@ class UserController extends Controller
 
             return response()->json([
                 'error' => 'no file field'
-            ], 400);
+            ], 201);
         }
 
         $vali = Validator::make($req->all(), [
@@ -44,7 +44,7 @@ class UserController extends Controller
             Log::debug('user create function receiving not a photo');
             return response()->json([
                 'error' => 'not a photo'
-            ], 400);
+            ], 201);
         }
 
         $f = $req->file;
