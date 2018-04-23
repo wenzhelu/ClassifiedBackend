@@ -77,39 +77,36 @@ class ItemController extends Controller
 
     public function create(Request $req) {
         $item = Item::create($req->all());
-        if (!$req->hasFile('file')) {
-            Log::debug('no file!');
+        // if (!$req->hasFile('file')) {
+        //     Log::debug('no file!');
 
-            return response()->json([
-                'error' => 'no file field'
-            ], 201);
-        }
+        //     return response()->json([
+        //         'error' => 'no file field'
+        //     ], 201);
+        // }
 
-        $vali = Validator::make($req->all(), [
-            'file' => 'required | mimes:jpeg,jpg,png',
-        ]);
+        // $vali = Validator::make($req->all(), [
+        //     'file' => 'required | mimes:jpeg,jpg,png',
+        // ]);
 
-        if ($vali->fails()) {
-            Log::debug('receiving not a photo');
-            return response()->json([
-                'error' => 'not a photo'
-            ], 201);
-        }
+        // if ($vali->fails()) {
+        //     Log::debug('receiving not a photo');
+        //     return response()->json([
+        //         'error' => 'not a photo'
+        //     ], 201);
+        // }
 
-        $f = $req->file;
-        $ext = $f->guessExtension();
-        $filename = uniqid("", true).".$ext";
-        // store it in photo disk
-        Log::debug('filename: '.$filename);
-        $f->storeAs('/', $filename, 'image');
+        // $f = $req->file;
+        // $ext = $f->guessExtension();
+        // $filename = uniqid("", true).".$ext";
+        // // store it in photo disk
+        // Log::debug('filename: '.$filename);
+        // $f->storeAs('/', $filename, 'image');
 
-        $item->photo_url = Storage::disk('image')->url($filename);
+        // $item->photo_url = Storage::disk('image')->url($filename);
 
-        $item->save();
-        return response()->json([
-            'success' => true,
-            'url' => Storage::disk('image')->url($filename),
-        ], 201);
+        // $item->save();
+        return response()->json($item, 201);
     }
 
     public function delete(Item $item) {

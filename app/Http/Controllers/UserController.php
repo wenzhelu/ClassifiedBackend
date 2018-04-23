@@ -28,39 +28,36 @@ class UserController extends Controller
 
     public function create(Request $req) {
         $user = User::create($req->all());
-        if (!$req->hasFile('file')) {
-            Log::debug('user create function receive no file!');
+        // if (!$req->hasFile('file')) {
+        //     Log::debug('user create function receive no file!');
 
-            return response()->json([
-                'error' => 'no file field'
-            ], 201);
-        }
+        //     return response()->json([
+        //         'error' => 'no file field'
+        //     ], 201);
+        // }
 
-        $vali = Validator::make($req->all(), [
-            'file' => 'required | mimes:jpeg,jpg,png',
-        ]);
+        // $vali = Validator::make($req->all(), [
+        //     'file' => 'required | mimes:jpeg,jpg,png',
+        // ]);
 
-        if ($vali->fails()) {
-            Log::debug('user create function receiving not a photo');
-            return response()->json([
-                'error' => 'not a photo'
-            ], 201);
-        }
+        // if ($vali->fails()) {
+        //     Log::debug('user create function receiving not a photo');
+        //     return response()->json([
+        //         'error' => 'not a photo'
+        //     ], 201);
+        // }
 
-        $f = $req->file;
-        $ext = $f->guessExtension();
-        $filename = uniqid("", true).".$ext";
-        // store it in photo disk
-        Log::debug('filename: '.$filename);
-        $f->storeAs('/', $filename, 'image');
+        // $f = $req->file;
+        // $ext = $f->guessExtension();
+        // $filename = uniqid("", true).".$ext";
+        // // store it in photo disk
+        // Log::debug('filename: '.$filename);
+        // $f->storeAs('/', $filename, 'image');
 
-        $user->photo_url = Storage::disk('image')->url($filename);
+        // $user->photo_url = Storage::disk('image')->url($filename);
 
-        $user->save();
-        return response()->json([
-            'success' => true,
-            'url' => Storage::disk('image')->url($filename),
-        ], 201);
+        // $user->save();
+        return response()->json($user, 201);
     }
 
     public function delete(User $user) {
