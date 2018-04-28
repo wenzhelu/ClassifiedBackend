@@ -27,7 +27,16 @@ class UserController extends Controller
     }
 
     public function create(Request $req) {
-        $user = User::create($req->all());
+        // $user = User::create($req->all());
+        $user = new User;
+        $user->name = $req->name;
+        $user->password = hash('md5', $req->password);
+        $user->phone_number = $req->phone_number;
+        $user->address = $req->address;
+        $user->occupation = $req->occupation;
+        $user->role = 1;
+        $user->email = $req->email;
+        $user->save();
         // if (!$req->hasFile('file')) {
         //     Log::debug('user create function receive no file!');
 
@@ -102,6 +111,25 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'url' => Storage::disk('image')->url($filename),
+        ], 200);
+    }
+
+    // should have email and password 
+    // in the request body
+    public function login(Request $req) {
+        $user = User::where('email', $req->input('email'))->first();
+        if (is_null($user) || hash('md5', $req->input('password')) !== $user->password) {
+            return response()->json(['Email and password not match' => true], 400);
+        } 
+
+        $token = bin2hex(random_bytes(16));     // generate random hash token
+
+        $user->token = $token;
+        $user->token_time = date('Y-m-d H:i:s');
+        $user->save();
+
+        return response()->json([
+            'token' => $token
         ], 200);
     }
 }

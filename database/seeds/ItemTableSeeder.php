@@ -12,7 +12,6 @@ class ItemTableSeeder extends Seeder
      */
     public function run()
     {
-        //
         Item::truncate();
 
         $f = \Faker\Factory::create();
@@ -21,9 +20,9 @@ class ItemTableSeeder extends Seeder
             Item::create([
                 'name' => $f->word,
                 'description' => $f->text,
-                'price' => $f->randomNumber,
+                'price' => $f->randomNumber(3),
                 'user_id' => $f->randomDigit + 1,
-                'category' => $f->word,
+                'category' => $i % 2 == 0 ? 'electronic' : 'furniture',
                 'purpose' => 0,     // all selling
                 // 'photo_url' => $f->url,
                 'status' => 0       // all active initially

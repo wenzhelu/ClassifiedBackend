@@ -26,6 +26,8 @@ class UserTableSeeder extends Seeder
                 'role' => 1,
                 'address' => $f->address,
                 'occupation' => $f->word,
+                'password' => 'temp',
+                'token' => 'token',
             ]);
         }
     }

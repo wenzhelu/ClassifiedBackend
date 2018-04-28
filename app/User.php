@@ -15,7 +15,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'photo_url', 'phone_number', 'address', 'occupation', 'role'
+        'name', 'email', 'photo_url', 'phone_number', 'address', 'occupation', 'role',
+        'token', 'token_time', 'password'
     ];
 
     public function toArray() {

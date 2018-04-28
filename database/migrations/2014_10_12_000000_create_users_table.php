@@ -24,7 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('occupation');
             // using integer to represent roles
             $table->integer('role');
-            // $table->string('password');
+            $table->string('password');
+            $table->string('token')->nullable();
+            $table->timestamp('token_time')->nullable();
             // $table->rememberToken();
             $table->timestamps();
             $table->charset = 'utf8';
