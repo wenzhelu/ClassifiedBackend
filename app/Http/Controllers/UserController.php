@@ -129,7 +129,8 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'id' => $user->id
         ], 200);
     }
 }
